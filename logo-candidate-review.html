@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ロゴ候補 小サイズレビュー</title>
+  <style>
+    :root {
+      --ink: #24242b;
+      --muted: #6f7280;
+      --paper: #fffdf8;
+      --line: #ded3bd;
+      --violet: #4b3a63;
+      font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f6f0e7;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--violet);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 0 0 18px;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      appearance: none;
+      border: 1px solid #cdbfda;
+      border-radius: 999px;
+      background: #fffdf8;
+      color: var(--violet);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 9px 14px;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--violet);
+      color: #fffdf8;
+      border-color: var(--violet);
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .sheet {
+      background: rgba(255, 253, 248, 0.94);
+      border: 1px solid rgba(222, 211, 189, 0.92);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .sheet h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .sheet img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid #eadfc9;
+      background: #fff;
+    }
+
+    .candidate {
+      background: rgba(255, 253, 248, 0.94);
+      border: 1px solid rgba(222, 211, 189, 0.92);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .candidate h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .drop {
+      min-height: 210px;
+      display: grid;
+      place-items: center;
+      border: 1px dashed #c7b99e;
+      border-radius: 8px;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.72) 25%, transparent 25%) 0 0 / 18px 18px,
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.72) 75%) 0 0 / 18px 18px,
+        #edf1f5;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .drop img,
+    .box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .drop img {
+      width: min(190px, 80%);
+      height: auto;
+    }
+
+    .sizes {
+      display: flex;
+      align-items: end;
+      gap: 14px;
+    }
+
+    .size {
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .box {
+      width: var(--size);
+      height: var(--size);
+      border-radius: 6px;
+      border: 1px solid #d7cbb4;
+      background: #fff;
+    }
+
+    .memo {
+      min-height: 64px;
+      border: 1px solid #ddd0b8;
+      border-radius: 6px;
+      padding: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        display: grid;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <div>
+        <h1>ロゴ候補 小サイズレビュー</h1>
+        <p class="subtitle">画像生成後、候補をここに貼り付けて 128 / 64 / 32 / 24px で確認する。</p>
+      </div>
+      <a href="index.html">名刺テンプレートへ</a>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="ロゴ候補の系統">
+      <button class="tab-button" type="button" role="tab" aria-selected="true" aria-controls="panel-simple" id="tab-simple">シンプル・マテリアル案</button>
+      <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-ornate" id="tab-ornate">旧方針案</button>
+      <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-cake-simple" id="tab-cake-simple">新方針ケーキ案</button>
+      <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-cake-ornate" id="tab-cake-ornate">旧方針ケーキ案</button>
+    </div>
+
+    <section class="panel active" id="panel-simple" role="tabpanel" aria-labelledby="tab-simple">
+      <section class="sheet">
+        <h2>シンプル・マテリアル案</h2>
+        <p class="subtitle">白、アイボリー、淡金を中心にした少色・少線の画像生成案。紫は一部候補だけに抑えている。</p>
+        <img src="assets/generated/logo-simple-material-contact-sheet.png" alt="シンプル・マテリアルなロゴ候補12案">
+      </section>
+      <div class="grid" data-candidate-grid="simple"></div>
+    </section>
+
+    <section class="panel" id="panel-ornate" role="tabpanel" aria-labelledby="tab-ornate">
+      <section class="sheet">
+        <h2>旧方針案</h2>
+        <p class="subtitle">初期の画像生成方針で作った、少し装飾性と紫要素が強いロゴ候補。比較用として残す。</p>
+        <img src="assets/generated/logo-ornate-contact-sheet.png" alt="旧方針のロゴ候補12案">
+      </section>
+      <div class="grid" data-candidate-grid="ornate"></div>
+    </section>
+
+    <section class="panel" id="panel-cake-simple" role="tabpanel" aria-labelledby="tab-cake-simple">
+      <section class="sheet">
+        <h2>新方針ケーキ案 再生成版</h2>
+        <p class="subtitle">数字と外枠が入った contact sheet からの切り出しではなく、1枚ずつ再生成した数字なし・外枠なし候補。白、アイボリー、淡金中心で、名刺ロゴに置いた時の清潔感を優先する。</p>
+      </section>
+      <div class="grid" data-candidate-grid="cakeSimple"></div>
+    </section>
+
+    <section class="panel" id="panel-cake-ornate" role="tabpanel" aria-labelledby="tab-cake-ornate">
+      <section class="sheet">
+        <h2>旧方針ケーキ案</h2>
+        <p class="subtitle">淡紫、金、装飾性を強めたケーキ候補。外周装飾が多いため、採用候補というより比較軸として見る。</p>
+        <img src="assets/generated/logo-cake-ornate-contact-sheet.png" alt="旧方針寄りの装飾ケーキロゴ候補12案">
+      </section>
+      <div class="grid" data-candidate-grid="cakeOrnate"></div>
+    </section>
+  </main>
+
+  <script>
+    const sets = {
+      simple: [
+        ["S1", "simple-01.png", "花型クッキー。単純で小サイズ向き。"],
+        ["S2", "simple-02.png", "シュークリーム。製菓感は強いが少し具象的。"],
+        ["S3", "simple-03.png", "淡紫マカロン。紫候補としては控えめ。"],
+        ["S4", "simple-04.png", "タルト。立体感が強く、名刺では大きめ向き。"],
+        ["S5", "simple-05.png", "メレンゲ。白方向で最も軽い。"],
+        ["S6", "simple-06.png", "飴/しずく。抽象寄りで小さくても残る。"],
+        ["S7", "simple-07.png", "リング菓子。ヘイローとの相性が良い。"],
+        ["S8", "simple-08.png", "プチフール。カード用には少し説明的。"],
+        ["S9", "simple-09.png", "チョコサブレ。色が重めで今回の条件からは弱い。"],
+        ["S10", "simple-10.png", "角砂糖。白く単純だが製菓感は控えめ。"],
+        ["S11", "simple-11.png", "淡紫メレンゲ。紫が必要な場合の控え。"],
+        ["S12", "simple-12.png", "丸い焼き菓子。明るく扱いやすい。"]
+      ],
+      ornate: [
+        ["O1", "ornate-01.png", "焼き菓子。ヘイローが青く、旧方針らしい。"],
+        ["O2", "ornate-02.png", "マドレーヌ。形は明快だがロゴ感は弱め。"],
+        ["O3", "ornate-03.png", "マカロン。製菓感は強いが小サイズでは横長。"],
+        ["O4", "ornate-04.png", "メレンゲ。白方向で軽いが立体感が強い。"],
+        ["O5", "ornate-05.png", "包み飴。左右の形が小サイズで潰れやすい。"],
+        ["O6", "ornate-06.png", "角砂糖。単純で名刺には置きやすい。"],
+        ["O7", "ornate-07.png", "淡紫の花型菓子。装飾性が強い。"],
+        ["O8", "ornate-08.png", "紫タルト。旧方針の中では完成度が高いが主張も強い。"],
+        ["O9", "ornate-09.png", "丸型飴。抽象寄りでアイコンらしい。"],
+        ["O10", "ornate-10.png", "紫ムース。立体物としては綺麗だが複雑。"],
+        ["O11", "ornate-11.png", "菱形菓子。シンプル寄りだが記号感が強い。"],
+        ["O12", "ornate-12.png", "紫クッキー。輪郭は良いが装飾が目立つ。"]
+      ],
+      cakeSimple: [
+        ["CSR1", "cake-simple-regenerated-01.png", "丸いショートケーキ。華やかだが、苺断面と上飾りは小サイズで細かい。"],
+        ["CSR2", "cake-simple-regenerated-02.png", "三角ショートケーキ。製菓感は強いが、横長で断面情報が多い。"],
+        ["CSR3", "cake-simple-regenerated-03.png", "角型レイヤーケーキ。清潔感があり、白と淡金のまとまりが良い。"],
+        ["CSR4", "cake-simple-regenerated-04.png", "ロールケーキ。シルエットが強く、24pxでもケーキとして読める。"],
+        ["CSR5", "cake-simple-regenerated-05.png", "白いドームムース。単純で上品だが、ケーキ感は少し抽象寄り。"],
+        ["CSR6", "cake-simple-regenerated-06.png", "カップケーキ。形は明快だが、サークルロゴとしては少し可愛い方向。"],
+        ["CSR7", "cake-simple-regenerated-07.png", "角型ショートケーキ。単純だが、箱型でやや名刺ロゴ向き。"],
+        ["CSR8", "cake-simple-regenerated-08.png", "白い丸ケーキ。最も条件に合い、小サイズでも輪郭が残りやすい。"],
+        ["CSR9", "cake-simple-regenerated-09.png", "クリームタルト。製菓感は強いが、縁の凹凸が小サイズで細かい。"],
+        ["CSR10", "cake-simple-regenerated-10.png", "横長レイヤーケーキ。上品だが、24pxでは横長の箱に見えやすい。"],
+        ["CSR11", "cake-simple-regenerated-11.png", "三角チーズケーキ。単純で明るいが、ヘイローとの余白が広い。"],
+        ["CSR12", "cake-simple-regenerated-12.png", "白いドリップケーキ。丸い輪郭と白金の印象が良く、名刺向き。"]
+      ],
+      cakeOrnate: [
+        ["CO1", "cake-ornate-01.png", "淡紫ムース。色と質感は強いが、外周装飾がロゴ条件から外れやすい。"],
+        ["CO2", "cake-ornate-02.png", "紫の角型ケーキ。高級感はあるが、層と装飾が多い。"],
+        ["CO3", "cake-ornate-03.png", "ショートケーキ。製菓感は強いが、外周装飾込みで情報量が多い。"],
+        ["CO4", "cake-ornate-04.png", "チョコレイヤー。色が重く、今回の明るい名刺方向からは外れる。"],
+        ["CO5", "cake-ornate-05.png", "紫ラウンドケーキ。旧方針らしいが、花飾りと外周が強い。"],
+        ["CO6", "cake-ornate-06.png", "葡萄の丸ケーキ。完成度は高いが、装飾枠が目立つ。"],
+        ["CO7", "cake-ornate-07.png", "紫ドームケーキ。シルエットは強いが、外周と真珠装飾が重い。"],
+        ["CO8", "cake-ornate-08.png", "紫ロールケーキ。形は読みやすいが、金線と花が細かい。"],
+        ["CO9", "cake-ornate-09.png", "紫クリームタルト。製菓感は強いが、小サイズでは複雑。"],
+        ["CO10", "cake-ornate-10.png", "紫レイヤーケーキ。華やかだが、装飾と断面情報が多い。"],
+        ["CO11", "cake-ornate-11.png", "紫ドリップケーキ。色は合うが、粒飾りと外周で細かい。"],
+        ["CO12", "cake-ornate-12.png", "紫シリンダーケーキ。単体としては綺麗だが、外周装飾が強い。"]
+      ]
+    };
+
+    function card([name, file, memo]) {
+      const src = `assets/generated/logos/${file}`;
+      return `
+        <section class="candidate">
+          <h2>${name}</h2>
+          <div class="drop"><img src="${src}" alt="${name}"></div>
+          <div class="sizes">
+            <div class="size"><div class="box" style="--size:128px"><img src="${src}" alt=""></div><span>128</span></div>
+            <div class="size"><div class="box" style="--size:64px"><img src="${src}" alt=""></div><span>64</span></div>
+            <div class="size"><div class="box" style="--size:32px"><img src="${src}" alt=""></div><span>32</span></div>
+            <div class="size"><div class="box" style="--size:24px"><img src="${src}" alt=""></div><span>24</span></div>
+          </div>
+          <div class="memo">${memo}</div>
+        </section>
+      `;
+    }
+
+    document.querySelectorAll("[data-candidate-grid]").forEach((grid) => {
+      grid.innerHTML = sets[grid.dataset.candidateGrid].map(card).join("");
+    });
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab-button").forEach((tab) => {
+          tab.setAttribute("aria-selected", String(tab === button));
+        });
+        document.querySelectorAll(".panel").forEach((panel) => {
+          panel.classList.toggle("active", panel.id === button.getAttribute("aria-controls"));
+        });
+      });
+    });
+  </script>
+</body>
+</html>

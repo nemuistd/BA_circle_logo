@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>グレゴリオ製菓 サークルロゴ案</title>
+  <style>
+    :root {
+      --ink: #20232b;
+      --muted: #687386;
+      --paper: #fffdf8;
+      --line: #d8c7a4;
+      --blue: #2fa8df;
+      --gold: #c99c42;
+      --shadow: 0 18px 44px rgba(28, 31, 38, 0.14);
+      font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(47, 168, 223, 0.07) 1px, transparent 1px),
+        linear-gradient(rgba(201, 156, 66, 0.07) 1px, transparent 1px),
+        #f8f3e9;
+      background-size: 28px 28px;
+      min-height: 100vh;
+    }
+
+    main {
+      width: min(1320px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 26px 0 42px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(27px, 4vw, 44px);
+      line-height: 1.08;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      border: 1px solid rgba(47, 168, 223, 0.34);
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 999px;
+      color: #14688c;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 12px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel,
+    .selected-panel,
+    .logo-frame {
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid rgba(216, 199, 164, 0.84);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 18px;
+      position: sticky;
+      top: 14px;
+    }
+
+    .panel h2,
+    .selected-panel h2 {
+      margin: 0 0 14px;
+      font-size: 17px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      min-height: 42px;
+      border: 0;
+      border-radius: 6px;
+      background: #20232b;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 850;
+      padding: 9px 12px;
+    }
+
+    button.secondary {
+      background: #fff;
+      color: #20232b;
+      border: 1px solid #cfc2a6;
+    }
+
+    a {
+      color: #14688c;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .preview-area {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .selected-panel {
+      padding: 16px;
+    }
+
+    .selected-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    #selectedConcept {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .selected-canvas {
+      display: grid;
+      place-items: center;
+      min-height: 330px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.58);
+      border-radius: 8px;
+    }
+
+    .selected-canvas .logo-mark {
+      width: min(330px, 86vw);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .logo-frame {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .logo-frame.is-selected {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .logo-preview {
+      display: grid;
+      place-items: center;
+      min-height: 210px;
+      border-radius: 8px;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.7) 25%, transparent 25%) 0 0 / 18px 18px,
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.7) 75%) 0 0 / 18px 18px,
+        #edf1f5;
+    }
+
+    .logo-mark {
+      display: block;
+      width: min(172px, 70%);
+      aspect-ratio: 1;
+      overflow: visible;
+    }
+
+    .logo-meta {
+      display: grid;
+      gap: 6px;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 850;
+    }
+
+    .logo-title button {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .logo-copy {
+      margin: 0;
+      min-height: 40px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .sizes {
+      display: flex;
+      align-items: end;
+      gap: 12px;
+      padding-top: 2px;
+    }
+
+    .size-sample {
+      display: grid;
+      gap: 4px;
+      justify-items: center;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .size-sample .logo-mark {
+      width: var(--sample-size);
+      border-radius: 4px;
+    }
+
+    .export-host {
+      position: fixed;
+      left: -200vw;
+      top: 0;
+      width: 1024px;
+      height: 1024px;
+      pointer-events: none;
+    }
+
+    .export-host .logo-mark {
+      width: 1024px;
+      height: 1024px;
+    }
+
+    @media (max-width: 1120px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        position: static;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: min(100% - 18px, 620px);
+        padding-top: 18px;
+      }
+
+      .topbar {
+        display: grid;
+      }
+
+      .badge {
+        width: fit-content;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <div>
+        <h1>グレゴリオ製菓 サークルロゴ案</h1>
+        <p class="subtitle">名刺とは別に比較する、文字なし・小サイズ重視のアイコン案。</p>
+      </div>
+      <div class="badge">非公式ファンメイド</div>
+    </div>
+
+    <div class="workspace">
+      <section class="panel" aria-labelledby="about-title">
+        <h2 id="about-title">ロゴ比較</h2>
+        <p class="note">お菓子モチーフを中心に、ブルーアーカイブらしい「浮いて追従する輪」を抽象的に足しています。ロゴ内に英字イニシャルは入れていません。</p>
+        <div class="actions">
+          <button id="downloadPng">選択案をPNG保存</button>
+          <button id="downloadSvg" class="secondary">SVG保存</button>
+        </div>
+        <p class="note">保存サイズは正方形 1024px です。名刺、サークル用アイコン、チャット用画像で使いやすい形を想定しています。</p>
+        <p class="note"><a href="index.html">名刺デザイン比較へ戻る</a></p>
+      </section>
+
+      <section class="preview-area" aria-label="ロゴ案一覧">
+        <section class="selected-panel" aria-labelledby="selected-title">
+          <div class="selected-head">
+            <div>
+              <h2 id="selected-title">選択中: <span id="selectedName"></span></h2>
+              <p id="selectedConcept"></p>
+            </div>
+          </div>
+          <div class="selected-canvas" id="selectedCanvas"></div>
+        </section>
+
+        <div class="gallery" id="gallery"></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="export-host" id="exportHost" aria-hidden="true"></div>
+
+  <script>
+    const logos = [
+      {
+        id: "halo-macaron",
+        name: "ヘイローマカロン",
+        concept: "マカロンの上に細い輪を浮かせた、最も素直なお菓子とヘイローの案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="ヘイローマカロン">
+            <ellipse cx="128" cy="55" rx="55" ry="16" fill="none" stroke="#2fa8df" stroke-width="12"/>
+            <path d="M58 130c0-33 31-57 70-57s70 24 70 57" fill="#f7c0ca"/>
+            <path d="M58 131c14 18 31 25 70 25s56-7 70-25v22c0 29-31 52-70 52s-70-23-70-52z" fill="#e88ea0"/>
+            <path d="M62 132c16 8 36 12 66 12s50-4 66-12" fill="none" stroke="#fff7e8" stroke-width="13" stroke-linecap="round"/>
+            <circle cx="94" cy="115" r="7" fill="#fff7e8"/>
+            <circle cx="132" cy="108" r="5" fill="#fff7e8"/>
+            <circle cx="166" cy="120" r="6" fill="#fff7e8"/>
+          </svg>`
+      },
+      {
+        id: "donut",
+        name: "聖菓ドーナツ",
+        concept: "ドーナツそのものを光輪として読む。小さいアイコンでも輪郭が残りやすい案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="聖菓ドーナツ">
+            <circle cx="128" cy="128" r="84" fill="#dca766"/>
+            <circle cx="128" cy="128" r="38" fill="#fffdf8"/>
+            <path d="M53 117c12-45 49-72 93-69 32 2 58 18 73 43-25-9-52-2-80 10-34 15-57 19-86 16z" fill="#8ed4ef"/>
+            <circle cx="91" cy="92" r="7" fill="#fff7e8"/>
+            <circle cx="150" cy="82" r="6" fill="#fff7e8"/>
+            <circle cx="181" cy="112" r="6" fill="#fff7e8"/>
+          </svg>`
+      },
+      {
+        id: "cupcake",
+        name: "カップケーキヘイロー",
+        concept: "カップケーキ上部に輪を浮かせる。製菓感が一目で伝わる案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="カップケーキヘイロー">
+            <ellipse cx="128" cy="50" rx="48" ry="14" fill="none" stroke="#c99c42" stroke-width="11"/>
+            <path d="M78 132c-2-37 20-63 50-63s52 26 50 63z" fill="#fff4cf"/>
+            <path d="M71 125c11-26 32-42 57-42s46 16 57 42c-18-8-33-7-47 1-13 8-28 9-44 0-8-5-15-5-23-1z" fill="#f2b8c6"/>
+            <path d="M72 126h112l-17 80H89z" fill="#60b6d5"/>
+            <path d="M94 137l6 56M128 136v59M162 137l-6 56" stroke="#fffdf8" stroke-width="8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "cream-puff",
+        name: "シュークリーム光輪",
+        concept: "丸いシューと粉砂糖の輪。柔らかく、親しみやすいサークル感を出す案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="シュークリーム光輪">
+            <ellipse cx="128" cy="58" rx="52" ry="15" fill="none" stroke="#2fa8df" stroke-width="10" stroke-dasharray="22 11"/>
+            <path d="M60 134c0-43 28-75 68-75s68 32 68 75-28 75-68 75-68-32-68-75z" fill="#d9a35f"/>
+            <path d="M74 114c13-25 33-38 54-38s41 13 54 38c-34-13-74-13-108 0z" fill="#efc77f"/>
+            <path d="M75 135c31 19 75 19 106 0" fill="none" stroke="#fff6d8" stroke-width="15" stroke-linecap="round"/>
+            <circle cx="92" cy="98" r="5" fill="#fffdf8"/>
+            <circle cx="126" cy="90" r="4" fill="#fffdf8"/>
+            <circle cx="162" cy="102" r="5" fill="#fffdf8"/>
+          </svg>`
+      },
+      {
+        id: "shortcake",
+        name: "ショートケーキ輪飾り",
+        concept: "三角ケーキに小さな輪を添える。名刺の隅にも置きやすい案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="ショートケーキ輪飾り">
+            <ellipse cx="149" cy="56" rx="40" ry="12" fill="none" stroke="#2fa8df" stroke-width="10"/>
+            <path d="M68 183L179 70l27 113z" fill="#fff8e8" stroke="#2c3542" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M87 162l91-93 12 49z" fill="#f49aad"/>
+            <path d="M78 174h123" stroke="#e3b65e" stroke-width="13" stroke-linecap="round"/>
+            <circle cx="163" cy="75" r="14" fill="#e84f65"/>
+            <path d="M157 61c-3-12 7-20 18-17" stroke="#53a65f" stroke-width="7" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "cookie-sign",
+        name: "クッキー聖印",
+        concept: "クッキーに抽象的な切れ込みを入れる。宗教感を強くしすぎない印章風。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="クッキー聖印">
+            <ellipse cx="128" cy="54" rx="45" ry="13" fill="none" stroke="#2fa8df" stroke-width="9"/>
+            <circle cx="128" cy="135" r="76" fill="#c99255"/>
+            <circle cx="128" cy="135" r="57" fill="none" stroke="#f5d39d" stroke-width="10"/>
+            <path d="M128 92v86M92 135h72" stroke="#fff3d8" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="88" cy="101" r="7" fill="#815832"/>
+            <circle cx="170" cy="110" r="6" fill="#815832"/>
+            <circle cx="103" cy="177" r="6" fill="#815832"/>
+            <circle cx="166" cy="166" r="7" fill="#815832"/>
+          </svg>`
+      },
+      {
+        id: "pudding",
+        name: "プリン冠光",
+        concept: "カラメルとヘイローを重ねる。ゆるく、チャット向けに使いやすい案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="プリン冠光">
+            <ellipse cx="128" cy="54" rx="48" ry="15" fill="none" stroke="#ffca5f" stroke-width="11"/>
+            <path d="M78 100c0-21 100-21 100 0l18 82c5 23-29 39-68 39s-73-16-68-39z" fill="#f7d777"/>
+            <ellipse cx="128" cy="101" rx="50" ry="20" fill="#a96834"/>
+            <path d="M88 122c26 11 54 11 80 0" stroke="#fff1bd" stroke-width="10" stroke-linecap="round"/>
+            <path d="M84 185c20 11 68 13 88 0" stroke="#d9a84a" stroke-width="8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "candy-ring",
+        name: "キャンディリング",
+        concept: "包み紙と輪を組み合わせた、遠目でも形が読みやすい案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="キャンディリング">
+            <ellipse cx="128" cy="64" rx="51" ry="15" fill="none" stroke="#2fa8df" stroke-width="10"/>
+            <path d="M61 112l36 18v52l-36 18 13-44z" fill="#f0b8c7"/>
+            <path d="M195 112l-36 18v52l36 18-13-44z" fill="#f0b8c7"/>
+            <rect x="88" y="101" width="80" height="100" rx="28" fill="#fff4c9" stroke="#2c3542" stroke-width="7"/>
+            <path d="M98 125c20 13 40 13 60 0M98 176c20-13 40-13 60 0" stroke="#2fa8df" stroke-width="9" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "whisk",
+        name: "ホイッパーヘイロー",
+        concept: "泡立て器の線を輪に見立てる。お菓子そのものより製菓道具に寄せた案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="ホイッパーヘイロー">
+            <ellipse cx="128" cy="55" rx="47" ry="14" fill="none" stroke="#2fa8df" stroke-width="10"/>
+            <path d="M86 87c45 0 76 26 76 61 0 31-22 53-53 53s-53-22-53-53c0-24 12-45 30-61z" fill="none" stroke="#c99c42" stroke-width="10" stroke-linecap="round"/>
+            <path d="M110 87c28 7 46 29 46 61 0 29-15 53-35 53s-35-24-35-53c0-28 9-51 24-61z" fill="none" stroke="#f2c66b" stroke-width="9" stroke-linecap="round"/>
+            <path d="M128 91v104" stroke="#fff3d1" stroke-width="8" stroke-linecap="round"/>
+            <path d="M118 198l-38 34" stroke="#2c3542" stroke-width="13" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "cake-box",
+        name: "箱入り聖菓",
+        concept: "ケーキ箱と浮いた輪。サークル名の製菓店らしさを強く出す案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="箱入り聖菓">
+            <ellipse cx="128" cy="52" rx="50" ry="14" fill="none" stroke="#2fa8df" stroke-width="10"/>
+            <path d="M61 113h134v87H61z" fill="#fff8e8" stroke="#2c3542" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M61 113l67-46 67 46z" fill="#f7cf83" stroke="#2c3542" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M128 67v133M91 139h74" stroke="#e58aa0" stroke-width="10" stroke-linecap="round"/>
+            <path d="M82 106c19 13 73 13 92 0" stroke="#fffdf8" stroke-width="8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "sugar-halo",
+        name: "粉砂糖の光輪",
+        concept: "焼き菓子の周囲に粉砂糖の輪を置く。抽象度が高く、ロゴらしい案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="粉砂糖の光輪">
+            <circle cx="128" cy="129" r="78" fill="#c98f54"/>
+            <circle cx="128" cy="129" r="58" fill="#e0aa6d"/>
+            <circle cx="128" cy="129" r="33" fill="#fffdf8"/>
+            <path d="M63 76c31-28 99-28 130 0" fill="none" stroke="#2fa8df" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="70" cy="99" r="5" fill="#fffdf8"/>
+            <circle cx="190" cy="99" r="5" fill="#fffdf8"/>
+            <circle cx="84" cy="181" r="5" fill="#fffdf8"/>
+            <circle cx="176" cy="181" r="5" fill="#fffdf8"/>
+          </svg>`
+      },
+      {
+        id: "blue-ribbon",
+        name: "ブルーリボン菓子",
+        concept: "青いリボンと菓子に小さな輪。ブルアカらしい青を残した使いやすい案。",
+        svg: `
+          <svg class="logo-mark" viewBox="0 0 256 256" role="img" aria-label="ブルーリボン菓子">
+            <ellipse cx="128" cy="52" rx="48" ry="14" fill="none" stroke="#2fa8df" stroke-width="10"/>
+            <circle cx="128" cy="133" r="68" fill="#fff4cb" stroke="#2c3542" stroke-width="8"/>
+            <path d="M64 135h128" stroke="#2fa8df" stroke-width="18" stroke-linecap="round"/>
+            <path d="M111 127l-38-28v72zM145 127l38-28v72z" fill="#2fa8df" stroke="#14688c" stroke-width="5" stroke-linejoin="round"/>
+            <circle cx="128" cy="135" r="25" fill="#f0b8c7" stroke="#14688c" stroke-width="5"/>
+          </svg>`
+      }
+    ];
+
+    const gallery = document.querySelector("#gallery");
+    const selectedCanvas = document.querySelector("#selectedCanvas");
+    const selectedName = document.querySelector("#selectedName");
+    const selectedConcept = document.querySelector("#selectedConcept");
+    const exportHost = document.querySelector("#exportHost");
+    let selectedId = logos[0].id;
+
+    function logoMarkup(logo) {
+      return logo.svg.trim();
+    }
+
+    function renderGallery() {
+      gallery.innerHTML = "";
+      logos.forEach((logo) => {
+        const frame = document.createElement("section");
+        frame.className = "logo-frame";
+        frame.dataset.logo = logo.id;
+        frame.innerHTML = `
+          <div class="logo-preview">${logoMarkup(logo)}</div>
+          <div class="logo-meta">
+            <div class="logo-title">
+              <span>${logo.name}</span>
+              <button type="button" data-select="${logo.id}">選択</button>
+            </div>
+            <p class="logo-copy">${logo.concept}</p>
+            <div class="sizes" aria-label="縮小プレビュー">
+              <div class="size-sample" style="--sample-size:48px">${logoMarkup(logo)}<span>48</span></div>
+              <div class="size-sample" style="--sample-size:32px">${logoMarkup(logo)}<span>32</span></div>
+              <div class="size-sample" style="--sample-size:24px">${logoMarkup(logo)}<span>24</span></div>
+            </div>
+          </div>
+        `;
+        gallery.append(frame);
+      });
+    }
+
+    function updateSelected() {
+      const logo = logos.find((item) => item.id === selectedId);
+      selectedName.textContent = logo.name;
+      selectedConcept.textContent = logo.concept;
+      selectedCanvas.innerHTML = logoMarkup(logo);
+      document.querySelectorAll(".logo-frame").forEach((frame) => {
+        frame.classList.toggle("is-selected", frame.dataset.logo === selectedId);
+      });
+    }
+
+    function selectLogo(id) {
+      selectedId = id;
+      updateSelected();
+    }
+
+    function selectedSvgMarkup() {
+      const logo = logos.find((item) => item.id === selectedId);
+      exportHost.innerHTML = logoMarkup(logo);
+      const svg = exportHost.querySelector("svg");
+      svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      svg.setAttribute("width", "1024");
+      svg.setAttribute("height", "1024");
+      return new XMLSerializer().serializeToString(svg);
+    }
+
+    function fileBaseName() {
+      return `gregorio-logo-${selectedId}`;
+    }
+
+    function downloadBlob(content, type, filename) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadSvg() {
+      downloadBlob(selectedSvgMarkup(), "image/svg+xml;charset=utf-8", `${fileBaseName()}.svg`);
+    }
+
+    function downloadPng() {
+      const image = new Image();
+      const url = URL.createObjectURL(new Blob([selectedSvgMarkup()], { type: "image/svg+xml;charset=utf-8" }));
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1024;
+        canvas.height = 1024;
+        canvas.getContext("2d").drawImage(image, 0, 0, 1024, 1024);
+        URL.revokeObjectURL(url);
+        canvas.toBlob((blob) => {
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = `${fileBaseName()}.png`;
+          link.click();
+          URL.revokeObjectURL(link.href);
+        }, "image/png");
+      };
+      image.src = url;
+    }
+
+    renderGallery();
+    updateSelected();
+
+    gallery.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-select]");
+      if (button) {
+        selectLogo(button.dataset.select);
+      }
+    });
+
+    document.querySelector("#downloadSvg").addEventListener("click", downloadSvg);
+    document.querySelector("#downloadPng").addEventListener("click", downloadPng);
+  </script>
+</body>
+</html>
