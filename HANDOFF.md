@@ -49,7 +49,6 @@
 7. 画像生成で以下の候補群を追加した。
    - `simple-01.png` から `simple-12.png`
    - `ornate-01.png` から `ornate-12.png`
-   - `cake-simple-01.png` から `cake-simple-12.png`
    - `cake-ornate-01.png` から `cake-ornate-12.png`
 8. 新方針ケーキ案は、contact sheet からの切り出しだと数字や外枠の影響が残るため、単体画像として再生成した。
 9. 再生成版は `cake-simple-regenerated-01.png` から `cake-simple-regenerated-12.png`。
@@ -74,7 +73,7 @@
 - `assets/generated/logos/cake-simple-regenerated-11.png`
 - `assets/generated/logos/cake-simple-regenerated-12.png`
 
-一方で、`README.md` と `LOGO_CANDIDATE_REVIEW.md` はまだ古い `CS1` から `CS12`、`cake-simple-01.png` から `cake-simple-12.png` 前提の説明と評価が残っている。ここは次に直すべき不整合。
+旧 `cake-simple-01.png` から `cake-simple-12.png` は不要になったため削除済み。現在使う新方針ケーキ案は `cake-simple-regenerated-01.png` から `cake-simple-regenerated-12.png`。
 
 ## 現時点の候補評価メモ
 

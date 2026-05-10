@@ -21,7 +21,7 @@
 
 ## 生成済み候補
 
-- `assets/generated/logo-simple-material-contact-sheet.png`
+- `assets/generated/透過/logo-simple-透過.png`
   - 白、アイボリー、淡金を中心にしたシンプル・マテリアル案12点。
   - 個別確認用に `assets/generated/logos/simple-01.png` から `simple-12.png` へ切り出し済み。
   - 方向性は「完成ロゴ」ではなく、少色・少線・明るい小型アイコンの比較軸。
@@ -30,7 +30,7 @@
   - 個別確認用に `assets/generated/logos/ornate-01.png` から `ornate-12.png` へ切り出し済み。
 - `assets/generated/logo-cake-simple-contact-sheet.png`
   - ケーキ単体を主役にした新方針案12点。
-  - 個別確認用に `assets/generated/logos/cake-simple-01.png` から `cake-simple-12.png` へ切り出し済み。
+  - 現在は透過版から `assets/generated/logos/cake-simple-regenerated-01.png` から `cake-simple-regenerated-12.png` へ切り出し済み。
 - `assets/generated/logo-cake-ornate-contact-sheet.png`
   - 淡紫、金、装飾性を強めた旧方針寄りケーキ案12点。
   - 個別確認用に `assets/generated/logos/cake-ornate-01.png` から `cake-ornate-12.png` へ切り出し済み。

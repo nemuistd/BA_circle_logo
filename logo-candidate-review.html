@@ -226,13 +226,14 @@
       <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-ornate" id="tab-ornate">旧方針案</button>
       <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-cake-simple" id="tab-cake-simple">新方針ケーキ案</button>
       <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-cake-ornate" id="tab-cake-ornate">旧方針ケーキ案</button>
+      <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-extra" id="tab-extra">追加ロゴ</button>
     </div>
 
     <section class="panel active" id="panel-simple" role="tabpanel" aria-labelledby="tab-simple">
       <section class="sheet">
         <h2>シンプル・マテリアル案</h2>
         <p class="subtitle">白、アイボリー、淡金を中心にした少色・少線の画像生成案。紫は一部候補だけに抑えている。</p>
-        <img src="assets/generated/logo-simple-material-contact-sheet.png" alt="シンプル・マテリアルなロゴ候補12案">
+        <img src="assets/generated/透過/logo-simple-透過.png" alt="シンプル・マテリアルなロゴ候補12案">
       </section>
       <div class="grid" data-candidate-grid="simple"></div>
     </section>
@@ -241,7 +242,7 @@
       <section class="sheet">
         <h2>旧方針案</h2>
         <p class="subtitle">初期の画像生成方針で作った、少し装飾性と紫要素が強いロゴ候補。比較用として残す。</p>
-        <img src="assets/generated/logo-ornate-contact-sheet.png" alt="旧方針のロゴ候補12案">
+        <img src="assets/generated/透過/logo-ornate-contact-prosess-透過-sheet.png" alt="旧方針のロゴ候補12案">
       </section>
       <div class="grid" data-candidate-grid="ornate"></div>
     </section>
@@ -250,6 +251,7 @@
       <section class="sheet">
         <h2>新方針ケーキ案 再生成版</h2>
         <p class="subtitle">数字と外枠が入った contact sheet からの切り出しではなく、1枚ずつ再生成した数字なし・外枠なし候補。白、アイボリー、淡金中心で、名刺ロゴに置いた時の清潔感を優先する。</p>
+        <img src="assets/generated/透過/logo-cake-simple-透過.png" alt="新方針ケーキロゴ候補12案">
       </section>
       <div class="grid" data-candidate-grid="cakeSimple"></div>
     </section>
@@ -258,9 +260,17 @@
       <section class="sheet">
         <h2>旧方針ケーキ案</h2>
         <p class="subtitle">淡紫、金、装飾性を強めたケーキ候補。外周装飾が多いため、採用候補というより比較軸として見る。</p>
-        <img src="assets/generated/logo-cake-ornate-contact-sheet.png" alt="旧方針寄りの装飾ケーキロゴ候補12案">
+        <img src="assets/generated/透過/logo-cake-rich-透過.png" alt="旧方針寄りの装飾ケーキロゴ候補12案">
       </section>
       <div class="grid" data-candidate-grid="cakeOrnate"></div>
+    </section>
+
+    <section class="panel" id="panel-extra" role="tabpanel" aria-labelledby="tab-extra">
+      <section class="sheet">
+        <h2>追加ロゴ</h2>
+        <p class="subtitle">サンプル名刺に近い、クッキーとケーキの追加ロゴ。</p>
+      </section>
+      <div class="grid" data-candidate-grid="extra"></div>
     </section>
   </main>
 
@@ -321,6 +331,9 @@
         ["CO10", "cake-ornate-10.png", "紫レイヤーケーキ。華やかだが、装飾と断面情報が多い。"],
         ["CO11", "cake-ornate-11.png", "紫ドリップケーキ。色は合うが、粒飾りと外周で細かい。"],
         ["CO12", "cake-ornate-12.png", "紫シリンダーケーキ。単体としては綺麗だが、外周装飾が強い。"]
+      ],
+      extra: [
+        ["EX1", "shiki-logo.png", "サンプル名刺に近いクッキーとケーキの追加ロゴ。"]
       ]
     };
 
