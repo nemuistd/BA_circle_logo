@@ -71,6 +71,13 @@
       text-decoration: none;
     }
 
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
     .workspace {
       display: grid;
       grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
@@ -587,6 +594,10 @@
         display: grid;
       }
 
+      .top-links {
+        justify-content: flex-start;
+      }
+
       .field-row,
       .panel-actions {
         grid-template-columns: 1fr;
@@ -615,7 +626,10 @@
         <h1>グレゴリオ製菓 名刺メーカー</h1>
         <p class="subtitle">サンプル名刺をベースに、名前・ID・フォント・ロゴ候補を切り替えて画像化できます。</p>
       </div>
-      <a class="link-pill" href="logo-candidate-review.html">ロゴ候補を見る</a>
+      <div class="top-links" aria-label="関連ページ">
+        <a class="link-pill" href="usage.html">使い方</a>
+        <a class="link-pill" href="logo-candidate-review.html">ロゴ候補を見る</a>
+      </div>
     </div>
 
     <div class="workspace">

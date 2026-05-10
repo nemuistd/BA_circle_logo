@@ -7,6 +7,7 @@
 ローカルHTMLだけで動きます。GitHub Pagesで公開すると、各メンバーがブラウザ上で名刺を編集して画像保存できます。
 
 - 名刺メーカー: `index.html`
+- 使い方: `usage.html`
 - 旧サークルロゴSVG試作: `logos.html`
 - ロゴ候補レビュー: `logo-candidate-review.html`
 - サンプル名刺: `assets/sample.jfif`
