@@ -11,6 +11,7 @@
 - ロゴ候補レビュー: `logo-candidate-review.html`
 - サンプル名刺: `assets/sample.jfif`
 - 生成ロゴ候補: `assets/generated/logos/*.png`
+- EXロゴ素材: `assets/logo/*.png`
 - 透過版contact sheet: `assets/generated/透過/*.png`
 
 ## 名刺メーカー
@@ -20,8 +21,11 @@
 - `サンプル縦長` と `標準縦長 55:91` を切り替え可能
 - サークル名、英字コピー、所属表記、名前、IDを自由入力可能
 - 上記5箇所のフォントを個別に切り替え可能
-- `assets/generated/logos` 内の生成済みPNGロゴ候補を選択可能
-- ロゴサイズと上下位置を調整可能
+- 上記5箇所の文字色を候補色、カラーピッカー、HEX入力で調整可能
+- `assets/generated/logos` と `assets/logo` 内のPNGロゴ候補を選択可能
+- 主ロゴのサイズ、左右位置、上下位置を調整可能
+- 主ロゴへ色変更可能な光輪レイヤーを追加可能
+- 連邦捜査部ロゴをサブロゴとして表示し、サイズと位置を調整可能
 - PNGまたはSVGで保存可能
 
 Google Fontsを読み込める環境では `Noto Serif JP`、`Noto Sans JP`、`Inter` が使われます。読み込みに失敗した場合も、端末標準フォントへフォールバックします。

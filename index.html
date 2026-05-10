@@ -187,10 +187,80 @@
       accent-color: #8d6246;
     }
 
+    input[type="color"] {
+      min-height: 39px;
+      padding: 4px;
+      cursor: pointer;
+    }
+
     input:focus,
     select:focus {
       outline: 2px solid rgba(192, 131, 91, 0.22);
       border-color: #9d6d4d;
+    }
+
+    .color-settings {
+      border: 1px solid rgba(207, 197, 180, 0.92);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.56);
+      overflow: hidden;
+    }
+
+    .color-settings summary {
+      min-height: 42px;
+      padding: 11px 12px;
+      color: #3d3d43;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 850;
+      list-style-position: inside;
+    }
+
+    .color-settings[open] summary {
+      border-bottom: 1px solid rgba(207, 197, 180, 0.72);
+    }
+
+    .color-settings-body {
+      display: grid;
+      gap: 12px;
+      padding: 12px;
+    }
+
+    .color-control {
+      display: grid;
+      gap: 8px;
+    }
+
+    .color-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .color-swatch {
+      width: 28px;
+      min-height: 28px;
+      border: 1px solid rgba(61, 61, 67, 0.18);
+      border-radius: 999px;
+      background: var(--swatch-color);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+      padding: 0;
+    }
+
+    .color-swatch.is-active {
+      outline: 2px solid rgba(126, 85, 59, 0.42);
+      outline-offset: 2px;
+    }
+
+    .color-inputs {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+    }
+
+    .logo-color-settings {
+      margin-top: 12px;
     }
 
     .logo-grid {
@@ -331,6 +401,16 @@
       --school-font: "Times New Roman";
       --name-font: "Noto Serif JP";
       --id-font: "Times New Roman";
+      --brand-color: #000000;
+      --tagline-color: #141414;
+      --school-color: #000000;
+      --name-color: #141414;
+      --id-color: #141414;
+      --halo-fill: #111111;
+      --halo-stroke: #d8bd8d;
+      --sub-logo-size: 120px;
+      --sub-logo-x: 0px;
+      --sub-logo-y: 0px;
       position: relative;
       width: min(100%, 460px);
       min-width: 320px;
@@ -371,13 +451,51 @@
       transform: translate(-50%, -50%);
       display: grid;
       place-items: center;
+      overflow: visible;
     }
 
-    .logo-wrap img {
+    .logo-wrap img,
+    .logo-halo,
+    .sub-logo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
+    }
+
+    .logo-wrap img,
+    .logo-halo {
+      grid-area: 1 / 1;
+    }
+
+    .logo-halo {
+      z-index: 2;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .logo-halo-fill {
+      fill: var(--halo-fill);
+    }
+
+    .logo-halo-outline {
+      fill: none;
+      stroke: var(--halo-stroke);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 4;
+    }
+
+    .sub-logo-wrap {
+      position: absolute;
+      left: calc(50% + var(--sub-logo-x));
+      top: calc(50% + var(--sub-logo-y));
+      width: var(--sub-logo-size);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      z-index: 3;
     }
 
     .brand-text,
@@ -395,7 +513,7 @@
 
     .brand-text {
       top: 45.7%;
-      color: #4a4a4a;
+      color: var(--brand-color);
       font-family: var(--brand-font), "Noto Serif JP", "Yu Mincho", serif;
       font-size: clamp(28px, 8.6cqw, 52px);
       font-weight: 700;
@@ -404,6 +522,7 @@
 
     .tagline {
       top: 53.9%;
+      color: var(--tagline-color);
       font-family: var(--tagline-font), Georgia, serif;
       font-size: clamp(17px, 4.55cqw, 28px);
       font-weight: 500;
@@ -412,7 +531,7 @@
 
     .school {
       top: 79.3%;
-      color: #565656;
+      color: var(--school-color);
       font-family: var(--school-font), Georgia, serif;
       font-size: clamp(22px, 5.7cqw, 36px);
       font-weight: 700;
@@ -421,6 +540,7 @@
 
     .person-name {
       top: 84.8%;
+      color: var(--name-color);
       font-family: var(--name-font), "Noto Serif JP", "Yu Mincho", serif;
       font-size: clamp(30px, 8.8cqw, 54px);
       font-weight: 900;
@@ -429,6 +549,7 @@
 
     .person-id {
       top: 59.7%;
+      color: var(--id-color);
       font-family: var(--id-font), Georgia, serif;
       font-size: clamp(20px, 5.2cqw, 33px);
       font-weight: 600;
@@ -500,14 +621,14 @@
     <div class="workspace">
       <section class="panel" aria-label="名刺編集">
         <div class="tab-list" role="tablist" aria-label="編集カテゴリ">
-          <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-size" data-tab="size">サイズ/ロゴ移動</button>
+          <button class="tab-button is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-size" data-tab="size">ロゴ配置</button>
           <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-text" data-tab="text">テキスト/フォント</button>
           <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="tab-logo" data-tab="logo">ロゴ選択</button>
         </div>
 
         <div class="tab-panel is-active" id="tab-size" role="tabpanel" data-tab-panel="size">
           <div class="control-section">
-            <h2>サイズ/ロゴ移動</h2>
+            <h2>主ロゴ配置</h2>
             <div class="field-row">
               <div class="field">
                 <label for="ratioSelect">比率</label>
@@ -539,6 +660,48 @@
               </div>
             </div>
           </div>
+
+          <div class="control-section">
+            <h2>サブロゴ配置</h2>
+            <div class="field-row">
+              <div class="field">
+                <label for="subLogoVisible">連邦捜査部ロゴ</label>
+                <select id="subLogoVisible">
+                  <option value="hide">非表示</option>
+                  <option value="show">表示</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="subLogoSize">サブロゴサイズ</label>
+                <input id="subLogoSize" type="range" min="40" max="220" value="120">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="subLogoX">サブロゴ左右</label>
+                <input id="subLogoX" type="range" min="-260" max="260" value="0">
+              </div>
+              <div class="field">
+                <label for="subLogoY">サブロゴ上下</label>
+                <input id="subLogoY" type="range" min="-620" max="620" value="273">
+              </div>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <h2>光輪設定</h2>
+            <div class="field">
+              <label for="logoHaloVisible">主ロゴに光輪を追加</label>
+              <select id="logoHaloVisible">
+                <option value="hide">非表示</option>
+                <option value="show">表示</option>
+              </select>
+            </div>
+            <details class="color-settings logo-color-settings">
+              <summary>光輪の色設定</summary>
+              <div class="color-settings-body" id="logoHaloSettings"></div>
+            </details>
+          </div>
         </div>
 
         <div class="tab-panel" id="tab-text" role="tabpanel" data-tab-panel="text">
@@ -552,19 +715,19 @@
               <label for="taglineText">英字コピー</label>
               <input id="taglineText" maxlength="48" value="Sweet times with Gregorio">
             </div>
-            <div class="field">
-              <label for="schoolText">所属表記</label>
-              <input id="schoolText" maxlength="24" value="S.C.H.A.L.E">
-            </div>
             <div class="field-row">
-              <div class="field">
-                <label for="nameText">名前</label>
-                <input id="nameText" maxlength="20" value="先生名">
-              </div>
               <div class="field">
                 <label for="idText">ID</label>
                 <input id="idText" maxlength="24" value="ID: 128091">
               </div>
+              <div class="field">
+                <label for="schoolText">所属表記</label>
+                <input id="schoolText" maxlength="24" value="S.C.H.A.L.E">
+              </div>
+            </div>
+            <div class="field">
+              <label for="nameText">名前</label>
+              <input id="nameText" maxlength="20" value="先生名">
             </div>
           </div>
 
@@ -578,20 +741,27 @@
               <label for="taglineFont">英字コピー</label>
               <select id="taglineFont" data-font-target="tagline"></select>
             </div>
-            <div class="field">
-              <label for="schoolFont">所属表記</label>
-              <select id="schoolFont" data-font-target="school"></select>
-            </div>
             <div class="field-row">
-              <div class="field">
-                <label for="nameFont">名前</label>
-                <select id="nameFont" data-font-target="name"></select>
-              </div>
               <div class="field">
                 <label for="idFont">ID</label>
                 <select id="idFont" data-font-target="id"></select>
               </div>
+              <div class="field">
+                <label for="schoolFont">所属表記</label>
+                <select id="schoolFont" data-font-target="school"></select>
+              </div>
             </div>
+            <div class="field">
+              <label for="nameFont">名前</label>
+              <select id="nameFont" data-font-target="name"></select>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <details class="color-settings">
+              <summary>色設定</summary>
+              <div class="color-settings-body" id="colorSettings"></div>
+            </details>
           </div>
         </div>
 
@@ -621,6 +791,14 @@
             <div class="card-inner">
               <div class="logo-wrap" id="logoWrap">
                 <img id="logoImage" alt="">
+                <svg class="logo-halo" id="logoHalo" viewBox="0 0 705 590" aria-hidden="true">
+                  <path class="logo-halo-fill" fill-rule="evenodd" d="M584.5 -77A232 50 0 1 1 120.5 -77A232 50 0 1 1 584.5 -77ZM550.5 -77A198 28 0 1 0 154.5 -77A198 28 0 1 0 550.5 -77Z"></path>
+                  <ellipse class="logo-halo-outline" cx="352.5" cy="-77" rx="232" ry="50"></ellipse>
+                  <ellipse class="logo-halo-outline" cx="352.5" cy="-77" rx="198" ry="28"></ellipse>
+                </svg>
+              </div>
+              <div class="sub-logo-wrap" id="subLogoWrap">
+                <img id="subLogoImage" alt="">
               </div>
               <div class="brand-text" data-text="brand">グレゴリオ製菓</div>
               <div class="tagline" data-text="tagline">Sweet times with Gregorio</div>
@@ -637,6 +815,8 @@
   <div class="export-host" id="exportHost" aria-hidden="true"></div>
 
   <script>
+    const subLogoFile = "assets/logo/連邦捜査部ロゴ_copyright_Nexon,Yostar.png";
+
     const logoFiles = [
       "cake-ornate-01.png", "cake-ornate-02.png", "cake-ornate-03.png", "cake-ornate-04.png",
       "cake-ornate-05.png", "cake-ornate-06.png", "cake-ornate-07.png", "cake-ornate-08.png",
@@ -650,7 +830,10 @@
       "shiki-logo.png",
       "simple-01.png", "simple-02.png", "simple-03.png", "simple-04.png",
       "simple-05.png", "simple-06.png", "simple-07.png", "simple-08.png",
-      "simple-09.png", "simple-10.png", "simple-11.png", "simple-12.png"
+      "simple-09.png", "simple-10.png", "simple-11.png", "simple-12.png",
+      "assets/logo/連邦捜査部ロゴ_copyright_Nexon,Yostar.png",
+      "assets/logo/ロゴ透過_輪っかも.png",
+      "assets/logo/ロゴ透過_下のみ.png"
     ];
 
     const fontOptions = [
@@ -681,7 +864,22 @@
       { id: "cake-simple", label: "ケーキ simple", test: (file) => file.startsWith("cake-simple-") },
       { id: "cake-rich", label: "ケーキ rich", test: (file) => file.startsWith("cake-ornate-") },
       { id: "ornate", label: "旧 ornate", test: (file) => file.startsWith("ornate-") },
-      { id: "extra", label: "追加", test: (file) => file === "shiki-logo.png" }
+      { id: "extra", label: "EX", test: (file) => file === "shiki-logo.png" || file.startsWith("assets/logo/") }
+    ];
+
+    const colorTargets = [
+      { key: "brand", label: "サークル名", cssVar: "--brand-color" },
+      { key: "tagline", label: "英字コピー", cssVar: "--tagline-color" },
+      { key: "id", label: "ID", cssVar: "--id-color" },
+      { key: "school", label: "所属表記", cssVar: "--school-color" },
+      { key: "name", label: "名前", cssVar: "--name-color" }
+    ];
+
+    const colorPalette = ["#141414", "#4a4a4a", "#565656", "#3d3147", "#5d4a78", "#8d6246", "#c0835b", "#d8bd8d", "#f7f0e3", "#ffffff"];
+
+    const logoHaloTargets = [
+      { key: "fill", label: "輪の塗りつぶし色" },
+      { key: "stroke", label: "輪郭色" }
     ];
 
     const defaultState = {
@@ -690,6 +888,11 @@
       logoSize: "206",
       logoX: "0",
       logoY: "0",
+      logoHaloVisible: "hide",
+      subLogoVisible: "hide",
+      subLogoSize: "120",
+      subLogoX: "0",
+      subLogoY: "273",
       brand: "グレゴリオ製菓",
       tagline: "Sweet times with Gregorio",
       school: "S.C.H.A.L.E",
@@ -700,6 +903,13 @@
       schoolFont: "Bodoni Moda SC",
       nameFont: "Noto Serif JP",
       idFont: "Times New Roman",
+      brandColor: "#000000",
+      taglineColor: "#141414",
+      schoolColor: "#000000",
+      nameColor: "#141414",
+      idColor: "#141414",
+      logoHaloFill: "#111111",
+      logoHaloStroke: "#d8bd8d",
       logo: "shiki-logo.png"
     };
 
@@ -709,6 +919,11 @@
       logoSize: document.querySelector("#logoSize"),
       logoX: document.querySelector("#logoX"),
       logoY: document.querySelector("#logoY"),
+      logoHaloVisible: document.querySelector("#logoHaloVisible"),
+      subLogoVisible: document.querySelector("#subLogoVisible"),
+      subLogoSize: document.querySelector("#subLogoSize"),
+      subLogoX: document.querySelector("#subLogoX"),
+      subLogoY: document.querySelector("#subLogoY"),
       brand: document.querySelector("#brandText"),
       tagline: document.querySelector("#taglineText"),
       school: document.querySelector("#schoolText"),
@@ -725,13 +940,48 @@
     const logoGrid = document.querySelector("#logoGrid");
     const logoCategoriesNode = document.querySelector("#logoCategories");
     const logoImage = document.querySelector("#logoImage");
+    const logoHalo = document.querySelector("#logoHalo");
     const logoWrap = document.querySelector("#logoWrap");
+    const subLogoImage = document.querySelector("#subLogoImage");
+    const subLogoWrap = document.querySelector("#subLogoWrap");
     const previewSize = document.querySelector("#previewSize");
+    const colorSettingsNode = document.querySelector("#colorSettings");
+    const logoHaloSettingsNode = document.querySelector("#logoHaloSettings");
     let selectedLogo = defaultState.logo;
     let activeLogoCategory = "all";
+    const colorValues = Object.fromEntries(colorTargets.map((target) => [target.key, defaultState[`${target.key}Color`]]));
+    const logoHaloValues = {
+      fill: defaultState.logoHaloFill,
+      stroke: defaultState.logoHaloStroke
+    };
 
     function logoPath(file) {
-      return `assets/generated/logos/${file}`;
+      if (!file.startsWith("assets/")) {
+        return `assets/generated/logos/${file}`;
+      }
+      return file.split("/").map((part) => encodeURIComponent(part)).join("/");
+    }
+
+    function logoLabel(file) {
+      return file.split("/").pop().replace(/\.png$/i, "");
+    }
+
+    function svgDataUrl(markup) {
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(markup)}`;
+    }
+
+    function haloMarkup() {
+      const fill = logoHaloValues.fill;
+      const stroke = logoHaloValues.stroke;
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 705 590">
+        <path fill="${fill}" fill-rule="evenodd" d="M584.5 -77A232 50 0 1 1 120.5 -77A232 50 0 1 1 584.5 -77ZM550.5 -77A198 28 0 1 0 154.5 -77A198 28 0 1 0 550.5 -77Z"/>
+        <ellipse cx="352.5" cy="-77" rx="232" ry="50" fill="none" stroke="${stroke}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="352.5" cy="-77" rx="198" ry="28" fill="none" stroke="${stroke}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+    }
+
+    function haloInnerMarkup() {
+      return haloMarkup().replace(/^<svg[^>]*>|<\/svg>$/g, "");
     }
 
     function fillFontSelects() {
@@ -743,6 +993,46 @@
       });
     }
 
+    function renderColorSettings() {
+      colorSettingsNode.innerHTML = colorTargets.map((target) => {
+        const color = defaultState[`${target.key}Color`];
+        const swatches = colorPalette.map((swatch) => `
+          <button class="color-swatch" type="button" data-color-target="${target.key}" data-color-value="${swatch}" style="--swatch-color: ${swatch}" aria-label="${target.label} ${swatch}"></button>
+        `).join("");
+        return `
+          <div class="color-control">
+            <div class="field-label">${target.label}</div>
+            <div class="color-palette">${swatches}</div>
+            <div class="color-inputs">
+              <input id="${target.key}ColorPicker" type="color" value="${color}" data-color-picker="${target.key}" aria-label="${target.label}の色">
+              <input id="${target.key}ColorHex" type="text" value="${color}" maxlength="7" inputmode="text" data-color-hex="${target.key}" aria-label="${target.label}のHEX色">
+            </div>
+          </div>
+        `;
+      }).join("");
+      syncColorControls();
+    }
+
+    function renderLogoHaloSettings() {
+      logoHaloSettingsNode.innerHTML = logoHaloTargets.map((target) => {
+        const color = logoHaloValues[target.key];
+        const swatches = colorPalette.map((swatch) => `
+          <button class="color-swatch" type="button" data-logo-halo-target="${target.key}" data-logo-halo-value="${swatch}" style="--swatch-color: ${swatch}" aria-label="${target.label} ${swatch}"></button>
+        `).join("");
+        return `
+          <div class="color-control">
+            <div class="field-label">${target.label}</div>
+            <div class="color-palette">${swatches}</div>
+            <div class="color-inputs">
+              <input id="logoHalo${target.key}Picker" type="color" value="${color}" data-logo-halo-picker="${target.key}" aria-label="${target.label}">
+              <input id="logoHalo${target.key}Hex" type="text" value="${color}" maxlength="7" inputmode="text" data-logo-halo-hex="${target.key}" aria-label="${target.label}のHEX色">
+            </div>
+          </div>
+        `;
+      }).join("");
+      syncLogoHaloControls();
+    }
+
     function renderLogoGrid() {
       logoGrid.innerHTML = "";
       const category = logoCategories.find((item) => item.id === activeLogoCategory) || logoCategories[0];
@@ -751,7 +1041,7 @@
         button.type = "button";
         button.className = "logo-choice";
         button.dataset.logo = file;
-        button.setAttribute("aria-label", file.replace(".png", ""));
+        button.setAttribute("aria-label", logoLabel(file));
         button.innerHTML = `<div class="logo-thumb"><img src="${logoPath(file)}" alt=""></div>`;
         logoGrid.append(button);
       });
@@ -788,6 +1078,75 @@
       document.querySelector(`[data-text="${key}"]`).textContent = value;
     }
 
+    function normalizeHex(value) {
+      const raw = String(value).trim();
+      const match = raw.match(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
+      if (!match) {
+        return null;
+      }
+      const hex = match[1];
+      if (hex.length === 3) {
+        return `#${hex.split("").map((char) => char + char).join("")}`.toLowerCase();
+      }
+      return `#${hex}`.toLowerCase();
+    }
+
+    function setColorValue(key, value) {
+      const normalized = normalizeHex(value);
+      if (!normalized) {
+        return false;
+      }
+      colorValues[key] = normalized;
+      syncColorControls();
+      syncPreview();
+      return true;
+    }
+
+    function syncColorControls() {
+      colorTargets.forEach((target) => {
+        const color = colorValues[target.key];
+        const picker = colorSettingsNode.querySelector(`[data-color-picker="${target.key}"]`);
+        const hex = colorSettingsNode.querySelector(`[data-color-hex="${target.key}"]`);
+        if (picker) {
+          picker.value = color;
+        }
+        if (hex && document.activeElement !== hex) {
+          hex.value = color;
+        }
+        colorSettingsNode.querySelectorAll(`[data-color-target="${target.key}"]`).forEach((button) => {
+          button.classList.toggle("is-active", normalizeHex(button.dataset.colorValue) === color);
+        });
+      });
+    }
+
+    function setLogoHaloValue(key, value) {
+      const normalized = normalizeHex(value);
+      if (!normalized) {
+        return false;
+      }
+      logoHaloValues[key] = normalized;
+      syncLogoHaloControls();
+      syncPreview();
+      return true;
+    }
+
+    function syncLogoHaloControls() {
+      logoHaloTargets.forEach((target) => {
+        const color = logoHaloValues[target.key];
+        const picker = logoHaloSettingsNode.querySelector(`[data-logo-halo-picker="${target.key}"]`);
+        const hex = logoHaloSettingsNode.querySelector(`[data-logo-halo-hex="${target.key}"]`);
+        if (picker) {
+          picker.value = color;
+        }
+        if (hex && document.activeElement !== hex) {
+          hex.value = color;
+        }
+      logoHaloSettingsNode.querySelectorAll(`[data-logo-halo-target="${target.key}"]`).forEach((button) => {
+          button.classList.toggle("is-active", normalizeHex(button.dataset.logoHaloValue) === color);
+        });
+      });
+    }
+
     function syncPreview() {
       const spec = ratioSpecs[fields.ratio.value];
       card.dataset.ratio = fields.ratio.value;
@@ -795,13 +1154,24 @@
       card.style.setProperty("--logo-size", `${fields.logoSize.value}px`);
       card.style.setProperty("--logo-x", `${fields.logoX.value}px`);
       card.style.setProperty("--logo-y", `${fields.logoY.value}px`);
+      card.style.setProperty("--sub-logo-size", `${fields.subLogoSize.value}px`);
+      card.style.setProperty("--sub-logo-x", `${fields.subLogoX.value}px`);
+      card.style.setProperty("--sub-logo-y", `${Number(fields.subLogoY.value) / 7.48}cqw`);
       card.style.setProperty("--brand-font", `"${fields.brandFont.value}"`);
       card.style.setProperty("--tagline-font", `"${fields.taglineFont.value}"`);
       card.style.setProperty("--school-font", `"${fields.schoolFont.value}"`);
       card.style.setProperty("--name-font", `"${fields.nameFont.value}"`);
       card.style.setProperty("--id-font", `"${fields.idFont.value}"`);
+      colorTargets.forEach((target) => {
+        card.style.setProperty(target.cssVar, colorValues[target.key]);
+      });
+      card.style.setProperty("--halo-fill", logoHaloValues.fill);
+      card.style.setProperty("--halo-stroke", logoHaloValues.stroke);
       logoImage.src = logoPath(selectedLogo);
+      subLogoImage.src = logoPath(subLogoFile);
+      logoHalo.style.display = fields.logoHaloVisible.value === "show" ? "block" : "none";
       logoWrap.style.display = fields.logoVisible.value === "show" ? "grid" : "none";
+      subLogoWrap.style.display = fields.subLogoVisible.value === "show" ? "grid" : "none";
       setText("brand", defaultState.brand);
       setText("tagline", defaultState.tagline);
       setText("school", defaultState.school);
@@ -816,6 +1186,11 @@
       fields.logoSize.value = defaultState.logoSize;
       fields.logoX.value = defaultState.logoX;
       fields.logoY.value = defaultState.logoY;
+      fields.logoHaloVisible.value = defaultState.logoHaloVisible;
+      fields.subLogoVisible.value = defaultState.subLogoVisible;
+      fields.subLogoSize.value = defaultState.subLogoSize;
+      fields.subLogoX.value = defaultState.subLogoX;
+      fields.subLogoY.value = defaultState.subLogoY;
       fields.brand.value = defaultState.brand;
       fields.tagline.value = defaultState.tagline;
       fields.school.value = defaultState.school;
@@ -826,7 +1201,14 @@
       fields.schoolFont.value = defaultState.schoolFont;
       fields.nameFont.value = defaultState.nameFont;
       fields.idFont.value = defaultState.idFont;
+      colorTargets.forEach((target) => {
+        colorValues[target.key] = defaultState[`${target.key}Color`];
+      });
+      logoHaloValues.fill = defaultState.logoHaloFill;
+      logoHaloValues.stroke = defaultState.logoHaloStroke;
       selectedLogo = defaultState.logo;
+      syncColorControls();
+      syncLogoHaloControls();
       syncPreview();
     }
 
@@ -877,10 +1259,14 @@
       const logoSize = Number(fields.logoSize.value) * scale;
       const logoX = Number(fields.logoX.value) * sx;
       const logoY = Number(fields.logoY.value) * sy;
-      const logoHref = fields.logoVisible.value === "show" ? await imageToDataUrl(logoPath(selectedLogo)) : "";
+      const subLogoSize = Number(fields.subLogoSize.value) * scale;
+      const subLogoX = Number(fields.subLogoX.value) * sx;
+      const subLogoY = Number(fields.subLogoY.value) * sx;
       const centerX = spec.width / 2;
       const logoCenterX = centerX + logoX;
       const logoCenterY = spec.height * 0.192 + logoY;
+      const subLogoCenterX = centerX + subLogoX;
+      const subLogoCenterY = spec.height / 2 + subLogoY;
       const paper = `
         <defs>
           <linearGradient id="paperLight" x1="0" y1="0" x2="1" y2="1">
@@ -891,15 +1277,28 @@
         </defs>
         <rect width="100%" height="100%" fill="url(#paperLight)"/>
       `;
-      const logo = logoHref ? `<image href="${logoHref}" x="${logoCenterX - logoSize / 2}" y="${logoCenterY - logoSize / 2}" width="${logoSize}" height="${logoSize}" preserveAspectRatio="xMidYMid meet"/>` : "";
+      let logo = "";
+      if (fields.logoVisible.value === "show") {
+        const logoHref = await imageToDataUrl(logoPath(selectedLogo));
+        logo = `<image href="${logoHref}" x="${logoCenterX - logoSize / 2}" y="${logoCenterY - logoSize / 2}" width="${logoSize}" height="${logoSize}" preserveAspectRatio="xMidYMid meet"/>`;
+        if (fields.logoHaloVisible.value === "show") {
+          logo += `<svg x="${logoCenterX - logoSize / 2}" y="${logoCenterY - logoSize / 2}" width="${logoSize}" height="${logoSize}" viewBox="0 0 705 590" overflow="visible">${haloInnerMarkup()}</svg>`;
+        }
+      }
+      let subLogo = "";
+      if (fields.subLogoVisible.value === "show") {
+        const subLogoHref = await imageToDataUrl(logoPath(subLogoFile));
+        subLogo = `<image href="${subLogoHref}" x="${subLogoCenterX - subLogoSize / 2}" y="${subLogoCenterY - subLogoSize / 2}" width="${subLogoSize}" height="${subLogoSize}" preserveAspectRatio="xMidYMid meet"/>`;
+      }
       return `<svg xmlns="http://www.w3.org/2000/svg" width="${spec.width}" height="${spec.height}" viewBox="0 0 ${spec.width} ${spec.height}">
         ${paper}
         ${logo}
-        <text x="${centerX}" y="${spec.height * 0.457}" style="${textStyle(fields.brandFont.value, 50 * scale, 700, "#4a4a4a")}">${escapeXml(fields.brand.value.trim() || defaultState.brand)}</text>
-        <text x="${centerX}" y="${spec.height * 0.539}" style="${textStyle(fields.taglineFont.value, 28 * scale, 500)}">${escapeXml(fields.tagline.value.trim() || defaultState.tagline)}</text>
-        <text x="${centerX}" y="${spec.height * 0.793}" style="${textStyle(fields.schoolFont.value, 36 * scale, 700, "#565656")}">${escapeXml(fields.school.value.trim() || defaultState.school)}</text>
-        <text x="${centerX}" y="${spec.height * 0.848}" style="${textStyle(fields.nameFont.value, 58 * scale, 900)}">${escapeXml(fields.name.value.trim() || defaultState.name)}</text>
-        <text x="${centerX}" y="${spec.height * 0.597}" style="${textStyle(fields.idFont.value, 33 * scale, 600)}">${escapeXml(fields.id.value.trim() || defaultState.id)}</text>
+        <text x="${centerX}" y="${spec.height * 0.457}" style="${textStyle(fields.brandFont.value, 50 * scale, 700, colorValues.brand)}">${escapeXml(fields.brand.value.trim() || defaultState.brand)}</text>
+        <text x="${centerX}" y="${spec.height * 0.539}" style="${textStyle(fields.taglineFont.value, 28 * scale, 500, colorValues.tagline)}">${escapeXml(fields.tagline.value.trim() || defaultState.tagline)}</text>
+        <text x="${centerX}" y="${spec.height * 0.793}" style="${textStyle(fields.schoolFont.value, 36 * scale, 700, colorValues.school)}">${escapeXml(fields.school.value.trim() || defaultState.school)}</text>
+        <text x="${centerX}" y="${spec.height * 0.848}" style="${textStyle(fields.nameFont.value, 58 * scale, 900, colorValues.name)}">${escapeXml(fields.name.value.trim() || defaultState.name)}</text>
+        <text x="${centerX}" y="${spec.height * 0.597}" style="${textStyle(fields.idFont.value, 33 * scale, 600, colorValues.id)}">${escapeXml(fields.id.value.trim() || defaultState.id)}</text>
+        ${subLogo}
       </svg>`;
     }
 
@@ -968,6 +1367,8 @@
     }
 
     fillFontSelects();
+    renderColorSettings();
+    renderLogoHaloSettings();
     renderLogoCategories();
     renderLogoGrid();
     syncPreview();
@@ -1008,6 +1409,76 @@
       activeLogoCategory = button.dataset.logoCategory;
       syncLogoCategories();
       renderLogoGrid();
+    });
+
+    colorSettingsNode.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-color-target]");
+      if (!button) {
+        return;
+      }
+      setColorValue(button.dataset.colorTarget, button.dataset.colorValue);
+    });
+
+    colorSettingsNode.addEventListener("input", (event) => {
+      const picker = event.target.closest("[data-color-picker]");
+      const hex = event.target.closest("[data-color-hex]");
+      if (picker) {
+        setColorValue(picker.dataset.colorPicker, picker.value);
+      }
+      if (hex) {
+        const normalized = normalizeHex(hex.value);
+        if (normalized) {
+          colorValues[hex.dataset.colorHex] = normalized;
+          colorSettingsNode.querySelector(`[data-color-picker="${hex.dataset.colorHex}"]`).value = normalized;
+          syncPreview();
+          syncColorControls();
+        }
+      }
+    });
+
+    colorSettingsNode.addEventListener("change", (event) => {
+      const hex = event.target.closest("[data-color-hex]");
+      if (!hex) {
+        return;
+      }
+      const normalized = normalizeHex(hex.value);
+      hex.value = normalized || colorValues[hex.dataset.colorHex];
+      syncColorControls();
+    });
+
+    logoHaloSettingsNode.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-logo-halo-target]");
+      if (!button) {
+        return;
+      }
+      setLogoHaloValue(button.dataset.logoHaloTarget, button.dataset.logoHaloValue);
+    });
+
+    logoHaloSettingsNode.addEventListener("input", (event) => {
+      const picker = event.target.closest("[data-logo-halo-picker]");
+      const hex = event.target.closest("[data-logo-halo-hex]");
+      if (picker) {
+        setLogoHaloValue(picker.dataset.logoHaloPicker, picker.value);
+      }
+      if (hex) {
+        const normalized = normalizeHex(hex.value);
+        if (normalized) {
+          logoHaloValues[hex.dataset.logoHaloHex] = normalized;
+          logoHaloSettingsNode.querySelector(`[data-logo-halo-picker="${hex.dataset.logoHaloHex}"]`).value = normalized;
+          syncPreview();
+          syncLogoHaloControls();
+        }
+      }
+    });
+
+    logoHaloSettingsNode.addEventListener("change", (event) => {
+      const hex = event.target.closest("[data-logo-halo-hex]");
+      if (!hex) {
+        return;
+      }
+      const normalized = normalizeHex(hex.value);
+      hex.value = normalized || logoHaloValues[hex.dataset.logoHaloHex];
+      syncLogoHaloControls();
     });
 
     document.querySelector("#downloadSvg").addEventListener("click", downloadSvg);
