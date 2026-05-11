@@ -418,29 +418,24 @@
       --sub-logo-size: 120px;
       --sub-logo-x: 0px;
       --sub-logo-y: 0px;
+      --card-aspect: 1496 / 2800;
       position: relative;
       width: min(100%, 460px);
-      min-width: 320px;
+      aspect-ratio: var(--card-aspect);
       margin: 0 auto;
       overflow: hidden;
       container-type: inline-size;
       color: #141414;
-      background:
-        radial-gradient(circle at 28% 18%, rgba(255,255,255,0.86), transparent 24%),
-        radial-gradient(circle at 72% 58%, rgba(216,214,210,0.26), transparent 28%),
-        linear-gradient(115deg, rgba(255,255,255,0.5), transparent 31%),
-        #f3f2ef;
-      border: 1px solid rgba(46, 42, 38, 0.18);
-      box-shadow: 0 16px 42px rgba(42, 36, 30, 0.18);
+      background: #f3f2ef;
       isolation: isolate;
     }
 
-    .business-card[data-ratio="sample"] {
-      aspect-ratio: 748 / 1400;
-    }
-
-    .business-card[data-ratio="standard"] {
-      aspect-ratio: 55 / 91;
+    .business-card > img,
+    .business-card > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .card-inner {
@@ -522,7 +517,7 @@
       top: 45.7%;
       color: var(--brand-color);
       font-family: var(--brand-font), "Noto Serif JP", "Yu Mincho", serif;
-      font-size: clamp(28px, 8.6cqw, 52px);
+      font-size: 8.6cqw;
       font-weight: 700;
       line-height: 1.1;
     }
@@ -531,7 +526,7 @@
       top: 53.9%;
       color: var(--tagline-color);
       font-family: var(--tagline-font), Georgia, serif;
-      font-size: clamp(17px, 4.55cqw, 28px);
+      font-size: 4.55cqw;
       font-weight: 500;
       line-height: 1.15;
     }
@@ -540,7 +535,7 @@
       top: 79.3%;
       color: var(--school-color);
       font-family: var(--school-font), Georgia, serif;
-      font-size: clamp(22px, 5.7cqw, 36px);
+      font-size: 5.7cqw;
       font-weight: 700;
       line-height: 1.1;
     }
@@ -549,7 +544,7 @@
       top: 84.8%;
       color: var(--name-color);
       font-family: var(--name-font), "Noto Serif JP", "Yu Mincho", serif;
-      font-size: clamp(30px, 8.8cqw, 54px);
+      font-size: 8.8cqw;
       font-weight: 900;
       line-height: 1.12;
     }
@@ -558,7 +553,7 @@
       top: 59.7%;
       color: var(--id-color);
       font-family: var(--id-font), Georgia, serif;
-      font-size: clamp(20px, 5.2cqw, 33px);
+      font-size: 5.2cqw;
       font-weight: 600;
       line-height: 1.12;
     }
@@ -661,7 +656,7 @@
             </div>
             <div class="field">
               <label for="logoSize">ロゴサイズ</label>
-              <input id="logoSize" type="range" min="120" max="320" value="206">
+              <input id="logoSize" type="range" min="120" max="320" value="186">
             </div>
             <div class="field-row">
               <div class="field">
@@ -670,7 +665,7 @@
               </div>
               <div class="field">
                 <label for="logoY">ロゴ上下</label>
-                <input id="logoY" type="range" min="-70" max="90" value="0">
+                <input id="logoY" type="range" min="-70" max="90" value="28">
               </div>
             </div>
           </div>
@@ -697,7 +692,7 @@
               </div>
               <div class="field">
                 <label for="subLogoY">サブロゴ上下</label>
-                <input id="subLogoY" type="range" min="-620" max="620" value="273">
+                <input id="subLogoY" type="range" min="-620" max="620" value="240">
               </div>
             </div>
           </div>
@@ -801,26 +796,7 @@
           <div class="preview-size" id="previewSize">1496 x 2800</div>
         </div>
         <div class="preview-scroll">
-          <article class="business-card" id="businessCard" data-ratio="sample">
-            <div class="card-inner">
-              <div class="logo-wrap" id="logoWrap">
-                <img id="logoImage" alt="">
-                <svg class="logo-halo" id="logoHalo" viewBox="0 0 705 590" aria-hidden="true">
-                  <path class="logo-halo-fill" fill-rule="evenodd" d="M584.5 -77A232 50 0 1 1 120.5 -77A232 50 0 1 1 584.5 -77ZM550.5 -77A198 28 0 1 0 154.5 -77A198 28 0 1 0 550.5 -77Z"></path>
-                  <ellipse class="logo-halo-outline" cx="352.5" cy="-77" rx="232" ry="50"></ellipse>
-                  <ellipse class="logo-halo-outline" cx="352.5" cy="-77" rx="198" ry="28"></ellipse>
-                </svg>
-              </div>
-              <div class="sub-logo-wrap" id="subLogoWrap">
-                <img id="subLogoImage" alt="">
-              </div>
-              <div class="brand-text" data-text="brand">グレゴリオ製菓</div>
-              <div class="tagline" data-text="tagline">Sweet times with Gregorio</div>
-              <div class="person-id" data-text="id">ID: 128091</div>
-              <div class="school" data-text="school">S.C.H.A.L.E</div>
-              <div class="person-name" data-text="name">先生名</div>
-            </div>
-          </article>
+          <article class="business-card" id="businessCard" data-ratio="sample"></article>
         </div>
       </section>
     </div>
@@ -872,6 +848,16 @@
       standard: { width: 1100, height: 1820, label: "1100 x 1820" }
     };
 
+    const previewBaseWidth = 460;
+    const legacySubLogoYBaseWidth = 748;
+    const textSizeCqw = {
+      brand: 8.6,
+      tagline: 4.55,
+      school: 5.7,
+      name: 8.8,
+      id: 5.2
+    };
+
     const logoCategories = [
       { id: "all", label: "すべて", test: () => true },
       { id: "simple", label: "シンプル", test: (file) => file.startsWith("simple-") },
@@ -899,14 +885,14 @@
     const defaultState = {
       ratio: "sample",
       logoVisible: "show",
-      logoSize: "206",
+      logoSize: "186",
       logoX: "0",
-      logoY: "0",
+      logoY: "28",
       logoHaloVisible: "hide",
       subLogoVisible: "hide",
       subLogoSize: "120",
       subLogoX: "0",
-      subLogoY: "273",
+      subLogoY: "240",
       brand: "グレゴリオ製菓",
       tagline: "Sweet times with Gregorio",
       school: "S.C.H.A.L.E",
@@ -953,16 +939,13 @@
     const card = document.querySelector("#businessCard");
     const logoGrid = document.querySelector("#logoGrid");
     const logoCategoriesNode = document.querySelector("#logoCategories");
-    const logoImage = document.querySelector("#logoImage");
-    const logoHalo = document.querySelector("#logoHalo");
-    const logoWrap = document.querySelector("#logoWrap");
-    const subLogoImage = document.querySelector("#subLogoImage");
-    const subLogoWrap = document.querySelector("#subLogoWrap");
     const previewSize = document.querySelector("#previewSize");
     const colorSettingsNode = document.querySelector("#colorSettings");
     const logoHaloSettingsNode = document.querySelector("#logoHaloSettings");
     let selectedLogo = defaultState.logo;
     let activeLogoCategory = "all";
+    let previewRenderId = 0;
+    let previewObjectUrl = "";
     const colorValues = Object.fromEntries(colorTargets.map((target) => [target.key, defaultState[`${target.key}Color`]]));
     const logoHaloValues = {
       fill: defaultState.logoHaloFill,
@@ -982,6 +965,18 @@
 
     function svgDataUrl(markup) {
       return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(markup)}`;
+    }
+
+    function previewPxFromCqw(cqw) {
+      return cqw / 100 * previewBaseWidth;
+    }
+
+    function scaledPreviewPx(value, spec) {
+      return Number(value) * spec.width / previewBaseWidth;
+    }
+
+    function subLogoYOffsetPreviewPx() {
+      return Number(fields.subLogoY.value) * previewBaseWidth / legacySubLogoYBaseWidth;
     }
 
     function haloMarkup() {
@@ -1087,11 +1082,6 @@
       });
     }
 
-    function setText(key, fallback) {
-      const value = fields[key].value.trim() || fallback;
-      document.querySelector(`[data-text="${key}"]`).textContent = value;
-    }
-
     function normalizeHex(value) {
       const raw = String(value).trim();
       const match = raw.match(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
@@ -1165,33 +1155,42 @@
       const spec = ratioSpecs[fields.ratio.value];
       card.dataset.ratio = fields.ratio.value;
       previewSize.textContent = spec.label;
-      card.style.setProperty("--logo-size", `${fields.logoSize.value}px`);
-      card.style.setProperty("--logo-x", `${fields.logoX.value}px`);
-      card.style.setProperty("--logo-y", `${fields.logoY.value}px`);
-      card.style.setProperty("--sub-logo-size", `${fields.subLogoSize.value}px`);
-      card.style.setProperty("--sub-logo-x", `${fields.subLogoX.value}px`);
-      card.style.setProperty("--sub-logo-y", `${Number(fields.subLogoY.value) / 7.48}cqw`);
-      card.style.setProperty("--brand-font", `"${fields.brandFont.value}"`);
-      card.style.setProperty("--tagline-font", `"${fields.taglineFont.value}"`);
-      card.style.setProperty("--school-font", `"${fields.schoolFont.value}"`);
-      card.style.setProperty("--name-font", `"${fields.nameFont.value}"`);
-      card.style.setProperty("--id-font", `"${fields.idFont.value}"`);
-      colorTargets.forEach((target) => {
-        card.style.setProperty(target.cssVar, colorValues[target.key]);
-      });
-      card.style.setProperty("--halo-fill", logoHaloValues.fill);
-      card.style.setProperty("--halo-stroke", logoHaloValues.stroke);
-      logoImage.src = logoPath(selectedLogo);
-      subLogoImage.src = logoPath(subLogoFile);
-      logoHalo.style.display = fields.logoHaloVisible.value === "show" ? "block" : "none";
-      logoWrap.style.display = fields.logoVisible.value === "show" ? "grid" : "none";
-      subLogoWrap.style.display = fields.subLogoVisible.value === "show" ? "grid" : "none";
-      setText("brand", defaultState.brand);
-      setText("tagline", defaultState.tagline);
-      setText("school", defaultState.school);
-      setText("name", defaultState.name);
-      setText("id", defaultState.id);
+      card.style.setProperty("--card-aspect", `${spec.width} / ${spec.height}`);
+      renderPreviewSvg();
       syncLogoSelection();
+    }
+
+    async function renderPreviewSvg() {
+      const renderId = ++previewRenderId;
+      try {
+        const markup = await svgMarkup();
+        if (renderId === previewRenderId) {
+          const previousObjectUrl = previewObjectUrl;
+          const nextObjectUrl = URL.createObjectURL(new Blob([markup], { type: "image/svg+xml;charset=utf-8" }));
+          const image = new Image();
+          image.alt = "名刺プレビュー";
+          image.onload = () => {
+            if (renderId !== previewRenderId) {
+              URL.revokeObjectURL(nextObjectUrl);
+              return;
+            }
+            previewObjectUrl = nextObjectUrl;
+            card.replaceChildren(image);
+            if (previousObjectUrl) {
+              URL.revokeObjectURL(previousObjectUrl);
+            }
+          };
+          image.onerror = () => {
+            URL.revokeObjectURL(nextObjectUrl);
+            if (renderId === previewRenderId) {
+              card.innerHTML = markup;
+            }
+          };
+          image.src = nextObjectUrl;
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     function resetSettings() {
@@ -1260,6 +1259,41 @@
       }
     }
 
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
+      });
+    }
+
+    async function imageAsset(src) {
+      const href = await imageToDataUrl(src);
+      const image = await loadImage(href);
+      return {
+        href,
+        width: image.naturalWidth || 1,
+        height: image.naturalHeight || 1
+      };
+    }
+
+    async function optionalImageAsset(src) {
+      try {
+        return await imageAsset(src);
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+
+    function containedImageMarkup(asset, centerX, centerY, boxSize) {
+      const ratio = asset.width / asset.height;
+      const width = ratio >= 1 ? boxSize : boxSize * ratio;
+      const height = ratio >= 1 ? boxSize / ratio : boxSize;
+      return `<image href="${asset.href}" x="${centerX - width / 2}" y="${centerY - height / 2}" width="${width}" height="${height}"/>`;
+    }
+
     function textStyle(font, size, weight, fill = "#141414") {
       return `font-family:'${font}', 'Noto Serif JP', serif;font-size:${size}px;font-weight:${weight};fill:${fill};text-anchor:middle;dominant-baseline:middle`;
     }
@@ -1267,15 +1301,13 @@
     async function svgMarkup() {
       await waitForFonts();
       const spec = ratioSpecs[fields.ratio.value];
-      const sx = spec.width / 748;
-      const sy = spec.height / 1400;
-      const scale = Math.min(sx, sy);
-      const logoSize = Number(fields.logoSize.value) * scale;
-      const logoX = Number(fields.logoX.value) * sx;
-      const logoY = Number(fields.logoY.value) * sy;
-      const subLogoSize = Number(fields.subLogoSize.value) * scale;
-      const subLogoX = Number(fields.subLogoX.value) * sx;
-      const subLogoY = Number(fields.subLogoY.value) * sx;
+      const scale = spec.width / previewBaseWidth;
+      const logoSize = scaledPreviewPx(fields.logoSize.value, spec);
+      const logoX = scaledPreviewPx(fields.logoX.value, spec);
+      const logoY = scaledPreviewPx(fields.logoY.value, spec);
+      const subLogoSize = scaledPreviewPx(fields.subLogoSize.value, spec);
+      const subLogoX = scaledPreviewPx(fields.subLogoX.value, spec);
+      const subLogoY = subLogoYOffsetPreviewPx() * scale;
       const centerX = spec.width / 2;
       const logoCenterX = centerX + logoX;
       const logoCenterY = spec.height * 0.192 + logoY;
@@ -1293,25 +1325,29 @@
       `;
       let logo = "";
       if (fields.logoVisible.value === "show") {
-        const logoHref = await imageToDataUrl(logoPath(selectedLogo));
-        logo = `<image href="${logoHref}" x="${logoCenterX - logoSize / 2}" y="${logoCenterY - logoSize / 2}" width="${logoSize}" height="${logoSize}" preserveAspectRatio="xMidYMid meet"/>`;
+        const logoAsset = await optionalImageAsset(logoPath(selectedLogo));
+        if (logoAsset) {
+          logo = containedImageMarkup(logoAsset, logoCenterX, logoCenterY, logoSize);
+        }
         if (fields.logoHaloVisible.value === "show") {
           logo += `<svg x="${logoCenterX - logoSize / 2}" y="${logoCenterY - logoSize / 2}" width="${logoSize}" height="${logoSize}" viewBox="0 0 705 590" overflow="visible">${haloInnerMarkup()}</svg>`;
         }
       }
       let subLogo = "";
       if (fields.subLogoVisible.value === "show") {
-        const subLogoHref = await imageToDataUrl(logoPath(subLogoFile));
-        subLogo = `<image href="${subLogoHref}" x="${subLogoCenterX - subLogoSize / 2}" y="${subLogoCenterY - subLogoSize / 2}" width="${subLogoSize}" height="${subLogoSize}" preserveAspectRatio="xMidYMid meet"/>`;
+        const subLogoAsset = await optionalImageAsset(logoPath(subLogoFile));
+        if (subLogoAsset) {
+          subLogo = containedImageMarkup(subLogoAsset, subLogoCenterX, subLogoCenterY, subLogoSize);
+        }
       }
       return `<svg xmlns="http://www.w3.org/2000/svg" width="${spec.width}" height="${spec.height}" viewBox="0 0 ${spec.width} ${spec.height}">
         ${paper}
         ${logo}
-        <text x="${centerX}" y="${spec.height * 0.457}" style="${textStyle(fields.brandFont.value, 50 * scale, 700, colorValues.brand)}">${escapeXml(fields.brand.value.trim() || defaultState.brand)}</text>
-        <text x="${centerX}" y="${spec.height * 0.539}" style="${textStyle(fields.taglineFont.value, 28 * scale, 500, colorValues.tagline)}">${escapeXml(fields.tagline.value.trim() || defaultState.tagline)}</text>
-        <text x="${centerX}" y="${spec.height * 0.793}" style="${textStyle(fields.schoolFont.value, 36 * scale, 700, colorValues.school)}">${escapeXml(fields.school.value.trim() || defaultState.school)}</text>
-        <text x="${centerX}" y="${spec.height * 0.848}" style="${textStyle(fields.nameFont.value, 58 * scale, 900, colorValues.name)}">${escapeXml(fields.name.value.trim() || defaultState.name)}</text>
-        <text x="${centerX}" y="${spec.height * 0.597}" style="${textStyle(fields.idFont.value, 33 * scale, 600, colorValues.id)}">${escapeXml(fields.id.value.trim() || defaultState.id)}</text>
+        <text x="${centerX}" y="${spec.height * 0.457}" style="${textStyle(fields.brandFont.value, previewPxFromCqw(textSizeCqw.brand) * scale, 700, colorValues.brand)}">${escapeXml(fields.brand.value.trim() || defaultState.brand)}</text>
+        <text x="${centerX}" y="${spec.height * 0.539}" style="${textStyle(fields.taglineFont.value, previewPxFromCqw(textSizeCqw.tagline) * scale, 500, colorValues.tagline)}">${escapeXml(fields.tagline.value.trim() || defaultState.tagline)}</text>
+        <text x="${centerX}" y="${spec.height * 0.793}" style="${textStyle(fields.schoolFont.value, previewPxFromCqw(textSizeCqw.school) * scale, 700, colorValues.school)}">${escapeXml(fields.school.value.trim() || defaultState.school)}</text>
+        <text x="${centerX}" y="${spec.height * 0.848}" style="${textStyle(fields.nameFont.value, previewPxFromCqw(textSizeCqw.name) * scale, 900, colorValues.name)}">${escapeXml(fields.name.value.trim() || defaultState.name)}</text>
+        <text x="${centerX}" y="${spec.height * 0.597}" style="${textStyle(fields.idFont.value, previewPxFromCqw(textSizeCqw.id) * scale, 600, colorValues.id)}">${escapeXml(fields.id.value.trim() || defaultState.id)}</text>
         ${subLogo}
       </svg>`;
     }
